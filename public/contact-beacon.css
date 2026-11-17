@@ -1,0 +1,158 @@
+.contact-beacon {
+  --beacon-image: url('images/contact-beacon.webp');
+  --beacon-screen: #09090b38;
+  --beacon-lantern-shade: #09090b9e;
+  --beacon-halo: #368bff28;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 54% 46%;
+  align-items: center;
+  min-height: max(29rem, 56.25vw);
+  color: var(--text);
+  background: var(--bg);
+  overflow: clip;
+}
+
+:root[data-theme='light'] .contact-beacon {
+  --beacon-image: url('images/contact-beacon-light.webp');
+  --beacon-screen: #f3f5f84d;
+  --beacon-lantern-shade: #65758b55;
+  --beacon-halo: #1260d418;
+}
+
+contact-beacon-art {
+  position: absolute;
+  display: block;
+  inset: 0;
+  z-index: -1;
+}
+
+.beacon-picture {
+  --lantern-x: 46%;
+  --lantern-y: 62%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, 51.56rem);
+  aspect-ratio: 16 / 9;
+  translate: -50% -50%;
+  background: var(--beacon-image) center / 100% 100% no-repeat;
+}
+
+.beacon-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 13% 24% at var(--lantern-x) var(--lantern-y), var(--beacon-lantern-shade), transparent 95%);
+  opacity: 0;
+  transition: opacity 650ms cubic-bezier(.23, 1, .32, 1);
+}
+
+contact-beacon-art[data-waiting] .beacon-glow {
+  opacity: 1;
+  transition: none;
+}
+
+@media (min-width: 761px) {
+  contact-beacon-art {
+    mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+  }
+
+  contact-beacon-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 51%, var(--beacon-screen) 76%);
+  }
+}
+
+.beacon-copy {
+  grid-column: 2;
+  padding: 0 7% 5% 3.5%;
+}
+
+.beacon-copy h2 {
+  font-size: clamp(2rem, 3.1vw, 4.2rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+  margin: 0 0 clamp(1.3rem, 2.4vw, 2.8rem);
+  text-wrap: balance;
+}
+
+.beacon-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem clamp(.5rem, 1.8vw, 1.9rem);
+}
+
+.beacon-links :is(a, span) {
+  display: inline-flex;
+  align-items: center;
+  gap: .58rem;
+  min-height: 44px;
+  padding: .55em .7em;
+  font-size: clamp(.92rem, 1.55vw, 1.65rem);
+  font-weight: 500;
+}
+
+.beacon-links a {
+  border: 1px solid transparent;
+  border-radius: .55rem;
+  color: inherit;
+}
+
+.beacon-links a[href^='mailto:'] {
+  border-color: var(--blue);
+  background: var(--surface);
+  box-shadow: 0 2px 14px var(--beacon-halo);
+}
+
+.beacon-links a:is(:hover, :focus-visible) {
+  background: var(--soft);
+  border-color: var(--blue);
+}
+
+.beacon-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+:root[data-motion='reduced'] .beacon-glow { opacity: 0; transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) .beacon-glow { opacity: 0; transition: none; }
+}
+
+@media (max-width: 760px) {
+  .contact-beacon {
+    display: block;
+    min-height: 0;
+  }
+
+  contact-beacon-art {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    overflow: clip;
+  }
+
+  contact-beacon-art::after {
+    content: '';
+    position: absolute;
+    inset: 65% 0 0;
+    background: linear-gradient(transparent, var(--bg));
+  }
+
+  .beacon-picture {
+    width: 164%;
+    left: 76%;
+    top: 45%;
+  }
+
+  .beacon-copy {
+    position: relative;
+    text-align: center;
+    padding: 0 1rem 3rem;
+    margin-top: -.3rem;
+  }
+
+  .beacon-links { justify-content: center; }
+}

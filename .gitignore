@@ -1,0 +1,25 @@
+node_modules/
+dist/
+preview/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# Local design history and one-off browser captures.
+/before-*/
+/reverted-animation-pass-*/
+/*.png
+/tools/
+/direction.txt
+/original-hashes.json
+/project-capture-results.json
+/IMAGE_PROMPTS.md
+/INTERACTION_FIXES.md
+/PDF_BUILD.md
+/PORTAL-STUDY.md
+/PROJECT_STACK.md
+/scripts/verify*.mjs
+/scripts/inspect-*.mjs
+/scripts/inspect-*.cjs
+/scripts/capture-project-sites.mjs
